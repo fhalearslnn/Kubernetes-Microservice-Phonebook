@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  labels:
+    name: web-svc
+    app: web-svc
+spec:
+  selector:
+    app: web-deploy
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30001
+  type: NodePort  

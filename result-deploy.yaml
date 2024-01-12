@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-deploy
+  labels: 
+    app: result-deploy
+    name: result-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result-deploy
+  template:
+    metadata:
+      labels:
+        app: result-deploy
+    spec:
+      containers:
+      - name: result
+        image: fhalearslan/result-server:v1
+        ports:
+        - containerPort: 80
+        envFrom: 
+        - configMapRef:
+            name: server-cm
+        - secretRef:
+            name: db-secret    
