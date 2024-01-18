@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-server
+  labels: 
+    app: result-server
+spec:
+  selector:
+    app: result-server
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30002
+  type: NodePort  
+
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-server 
+  labels:
+    app: result-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: result-server
+  template:
+    metadata:
+      labels:
+        app: result-server
+    spec:
+      containers:
+      - image: fhalearslan/result-app
+        name: resultserver
+        ports:
+        - containerPort: 80
+        envFrom: 
+        - secretRef:
+            name: mysql-secret

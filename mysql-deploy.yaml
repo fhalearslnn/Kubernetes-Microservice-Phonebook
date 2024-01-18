@@ -1,11 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
   labels:
+    app: mysql
     name: mysql
 spec:
   replicas: 1
+  strategy:
+     type: Recreate 
   selector:
     matchLabels:
       app: mysql
@@ -15,19 +17,20 @@ spec:
         app: mysql
     spec:
       containers:
-      - name: mysql
-        image: mysql:5.7
+      - image: mysql:5.7
+        name: mysql
         ports:
         - containerPort: 3306
         envFrom:
         - secretRef:
-            name: db-secret 
-        - configMapRef:
-            name: db-cm
-        volumeMounts:
-          - mountPath: /var/lib/mysql     
+            name: mysql-secret
+        volumeMounts: 
+          - mountPath: /var/lib/mysql
             name: mysql-pv
       volumes:
         - name: mysql-pv
           persistentVolumeClaim:
-             claimName: mysql-pv        
+            claimName: mysql-pvc
+
+
+
