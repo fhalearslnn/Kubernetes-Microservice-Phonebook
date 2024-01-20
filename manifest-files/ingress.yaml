@@ -15,7 +15,7 @@ spec:
           service:
             name: web-server
             port:
-              number: 3000
+              number: 80
       - path: /result
         pathType: Prefix
         backend:
