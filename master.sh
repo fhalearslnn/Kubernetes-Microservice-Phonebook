@@ -38,4 +38,11 @@ su - ubuntu -c 'kubectl apply -f https://github.com/coreos/flannel/raw/master/Do
 su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.26/deploy/local-path-storage.yaml'
 sudo -i -u ubuntu kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 cd /home/ubuntu
-su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.26/deploy/local-path-storage.yaml'
+su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/fhalearslnn/Kubernetes-Microservice-Phonebook/main/manifest-files/mysql-secret.yaml'
+su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/fhalearslnn/Kubernetes-Microservice-Phonebook/main/manifest-files/mysql-pv.yaml'
+su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/fhalearslnn/Kubernetes-Microservice-Phonebook/main/manifest-files/mysql-pvc.yaml'
+su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/fhalearslnn/Kubernetes-Microservice-Phonebook/main/manifest-files/mysql-svc.yaml'
+su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/fhalearslnn/Kubernetes-Microservice-Phonebook/main/manifest-files/mysql-deploy.yaml'
+su - ubuntu -c 'sleep 90'
+su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/fhalearslnn/Kubernetes-Microservice-Phonebook/main/manifest-files/result-svc-deploy.yaml'
+su - ubuntu -c 'kubectl apply -f https://raw.githubusercontent.com/fhalearslnn/Kubernetes-Microservice-Phonebook/main/manifest-files/web-svc-deploy.yaml'
