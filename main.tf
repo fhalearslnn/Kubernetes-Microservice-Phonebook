@@ -25,7 +25,7 @@ data "aws_ami" "alami" {
 }
 variable "key_name" {
   type = string
-  default = "firstkey"
+  default = "<your-key>"
   
 }
 resource "aws_instance" "prj" {
